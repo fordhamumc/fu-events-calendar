@@ -118,6 +118,31 @@ add_filter('tribe_get_event_link', 'fu_redirect_link', 10, 2);
 
 
 /**
+ * Custom field defaults
+ *
+ * @author Michael Foley
+ *
+ * @var mixed   $value    the current value for custom items
+ * @var string  $name     custom field name
+ * @var int     $event_id the event id (if available)
+ *
+ * @return mixed
+ *
+ */
+
+function fu_custom_field_defaults( $value, $name, $event_id ) {
+  if ( empty( $event_id ) ) {
+    $custom_audience = reset(fu_get_fields_by_label('Audience'));
+    if ( $custom_audience['name'] == $name) {
+      return str_replace("\n", "|", $custom_audience['values']);
+    }
+  }
+  return $value;
+}
+add_filter('tribe_events_community_custom_field_value', 'fu_custom_field_defaults', 10, 3);
+
+
+/**
  * Filter events by audience
  *
  * @author Michael Foley

@@ -29,7 +29,6 @@ defined( 'WPINC' ) or die;
 			$value = esc_textarea( trim( stripslashes( $value ) ) );
 		}
 	}
-
 	$field_id = sanitize_html_class( 'tribe_custom_' . $field['label'] );
 	if ( in_array( $field['type'], array( 'radio', 'dropdown', 'checkbox' ) ) ) {
 		$field['name'] = stripslashes( $field['name'] );
@@ -86,7 +85,6 @@ defined( 'WPINC' ) or die;
 			<?php endforeach; ?>
 		<?php elseif ( 'checkbox' === $field['type'] ) : ?>
 			<?php foreach ( $options as $option ) : ?>
-				<?php echo $field['label']; ?>
 				<label>
 					<input
 						type="checkbox"
