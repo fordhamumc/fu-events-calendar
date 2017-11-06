@@ -114,3 +114,34 @@ function fu_redirect_link($link, $post_id) {
   return $link;
 }
 add_filter('tribe_get_event_link', 'fu_redirect_link', 10, 2);
+
+
+
+/**
+ * Filter events by audience
+ *
+ * @author Michael Foley
+ *
+ * @var mixed $q
+ *
+ */
+
+function fu_meta_query( $q ) {
+  if ( !is_admin() && $q->tribe_is_event_query ) {
+    if( isset($q->query_vars['post_type']) && $q->query_vars['post_type'] == TribeEvents::POSTTYPE ) {
+      $audience = filter_input( INPUT_GET, 'f_audience', FILTER_SANITIZE_STRING );
+      $meta_query = [];
+
+      if( $audience ) {
+        $meta_name = '_' . reset(fu_get_fields_by_label('Audience'))['name'];
+        $meta_query[] = [
+          'key'   => $meta_name,
+          'value' => $audience
+        ];
+        $meta_query_combined = array_merge( (array) $meta_query, (array) $q->get( 'meta_query' ) );
+        $q->set( 'meta_query', $meta_query_combined );
+      }
+    }
+  }
+};
+add_action('tribe_events_parse_query', 'fu_meta_query');
