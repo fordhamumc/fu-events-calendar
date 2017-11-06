@@ -65,3 +65,52 @@ function fu_update_custom_fields($fields) {
   return fu_remove_fields_by_label($fields, $labels);
 }
 add_filter( 'tribe_events_community_custom_fields', 'fu_update_custom_fields', 10, 2);
+
+
+
+/**
+ * Extract Custom Fields
+ * Grab certain custom fields to use elsewhere
+ *
+ * @author Michael Foley
+ *
+ * @var mixed $labels   the labels to look up
+ *
+ * @return array
+ *
+ */
+
+function fu_get_fields_by_label( $labels ){
+  $fields = tribe_get_option( 'custom-fields' );
+  if ( empty( $fields ) || ! is_array( $fields ) ) {
+    return array();
+  }
+  $captured_fields = array();
+
+  foreach((array) $labels as $label) {
+    foreach($fields as $subKey => $subArray){
+      if($subArray['label'] == $label){
+        $captured_fields[$subKey] = $fields[$subKey];
+      }
+    }
+  }
+  return $captured_fields;
+}
+
+function fu_update_website_fields() {
+  $labels = array('Redirect to External Link', 'Registration Link', 'Attendee List Link');
+  foreach(fu_get_fields_by_label($labels) as $field) {
+    tribe_get_template_part( 'community/modules/custom-item', null, $field );
+  }
+}
+add_action( 'tribe_events_community_section_after_website_row', 'fu_update_website_fields');
+
+function fu_redirect_link($link, $post_id) {
+  $event_url = function_exists( 'tribe_get_event_website_url' ) ? tribe_get_event_website_url() : tribe_community_get_event_website_url();
+  $redirect = !!Tribe__Events__Pro__Custom_Meta::get_custom_field_by_label('Redirect to External Link', $post_id);
+  if ($redirect && $event_url) {
+    return preg_replace('#(http|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+\#-]*[\w@?^=%&/~+\#-])?#', $event_url, $link);
+  }
+  return $link;
+}
+add_filter('tribe_get_event_link', 'fu_redirect_link', 10, 2);
