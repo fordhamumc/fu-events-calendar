@@ -183,11 +183,11 @@ add_action('tribe_events_parse_query', 'fu_meta_query');
  *
  */
 
-function remove_united_states_venue($venue_details){
+function fu_remove_united_states_venue($venue_details){
   $venue_details["address"] = str_replace("United States", "", $venue_details["address"]);
   return $venue_details;
 }
-add_filter( 'tribe_get_venue_details', 'remove_united_states_venue' );
+add_filter( 'tribe_get_venue_details', 'fu_remove_united_states_venue' );
 
 
 /**
@@ -202,7 +202,7 @@ add_filter( 'tribe_get_venue_details', 'remove_united_states_venue' );
  *
  */
 
-function custom_imods_event_feed($excerpt){
+function fu_custom_imods_event_feed($excerpt){
   global $post;
 
   $format = filter_input( INPUT_GET, 'imods', FILTER_SANITIZE_STRING );
@@ -245,4 +245,49 @@ RSS;
 
   return $excerpt;
 }
-add_filter( 'the_excerpt_rss', 'custom_imods_event_feed' );
+add_filter( 'the_excerpt_rss', 'fu_custom_imods_event_feed' );
+
+
+/**
+ * Add event counts to event venue admin page
+ *
+ * @author Michael Foley
+ *
+ * @var array     $columns  the columns in the venue table
+ *
+ * @return array
+ *
+ */
+
+function fu_venue_columns_head($columns) {
+  $columns['fu_events']  = 'Events';
+  return $columns;
+}
+
+
+/**
+ * Add event counts to event venue admin page
+ *
+ * @author Michael Foley
+ *
+ * @var string    $columns_name   name of the column
+ * @var string    $post_ID        the venue id
+ *
+ */
+
+function fu_venue_columns_content($column_name, $post_ID) {
+
+  if ($column_name == 'fu_events') {
+    $args = array(
+      'posts_per_page'    => -1,
+      'post_type'         => TribeEvents::POSTTYPE,
+      'post_status'       => array('publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit'),
+      'meta_key'          => '_EventVenueID',
+      'meta_value'        => $post_ID
+    );
+    $q = new WP_Query($args);
+    echo $q->post_count;
+  }
+}
+add_filter('manage_tribe_venue_posts_columns', 'fu_venue_columns_head');
+add_action('manage_tribe_venue_posts_custom_column', 'fu_venue_columns_content', 10, 2);
