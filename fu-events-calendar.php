@@ -271,11 +271,11 @@ function fu_venue_columns_head($columns) {
  * @author Michael Foley
  *
  * @var string    $columns_name   name of the column
- * @var string    $post_ID        the venue id
+ * @var string    $event_id       the venue id
  *
  */
 
-function fu_venue_columns_content($column_name, $post_ID) {
+function fu_venue_columns_content($column_name, $event_id) {
 
   if ($column_name == 'fu_events') {
     $args = array(
@@ -283,7 +283,7 @@ function fu_venue_columns_content($column_name, $post_ID) {
       'post_type'         => TribeEvents::POSTTYPE,
       'post_status'       => array('publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit'),
       'meta_key'          => '_EventVenueID',
-      'meta_value'        => $post_ID
+      'meta_value'        => $event_id
     );
     $q = new WP_Query($args);
     echo $q->post_count;
@@ -307,3 +307,26 @@ function fu_list_structured_data() {
   Tribe__Events__JSON_LD__Event::instance()->markup( $wp_query->posts );
 }
 add_action( 'wp_head', 'fu_list_structured_data');
+
+
+/**
+ * Updates time to Fordham's style
+ *
+ * @author Michael Foley
+ *
+ * @var string    $inner      the inner html date/time content
+ * @var string    $event_id   the id of the current event in the loop
+ *
+ * @return string
+ *
+ */
+
+function fu_update_time($inner, $event_id) {
+  $inner = str_replace( array(':00', 'am', 'pm'), array('', 'a.m.', 'p.m.'), $inner );
+  if ( tribe_get_start_date( $event_id, false, 'mdya' ) === tribe_get_end_date( $event_id, false, 'mdya' ) &&
+       preg_match_all('# [ap]\.m\.#', $inner) > 1 ) {
+    $inner = preg_replace('# [ap]\.m\.#', '', $inner, 1);
+  }
+  return $inner;
+}
+add_filter( 'tribe_events_event_schedule_details_inner', 'fu_update_time', 10, 2);
