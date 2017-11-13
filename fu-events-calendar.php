@@ -291,3 +291,19 @@ function fu_venue_columns_content($column_name, $post_ID) {
 }
 add_filter('manage_tribe_venue_posts_columns', 'fu_venue_columns_head');
 add_action('manage_tribe_venue_posts_custom_column', 'fu_venue_columns_content', 10, 2);
+
+
+/**
+ * Add structured data to list view
+ *
+ * @author Michael Foley
+ *
+ */
+
+function fu_list_structured_data() {
+  if ( !tribe_is_list_view() ) return;
+
+  global $wp_query;
+  Tribe__Events__JSON_LD__Event::instance()->markup( $wp_query->posts );
+}
+add_action( 'wp_head', 'fu_list_structured_data');
