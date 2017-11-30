@@ -330,3 +330,24 @@ function fu_update_time($inner, $event_id) {
   return $inner;
 }
 add_filter( 'tribe_events_event_schedule_details_inner', 'fu_update_time', 10, 2);
+
+
+/**
+ * Reorder search bar
+ *
+ * @author Michael Foley
+ *
+ * @var array    $filters      the filters in the searchbar
+ *
+ * @return array
+ *
+ */
+
+function fu_search_bar_order($filters) {
+  $key = "tribe-bar-search";
+  if ( array_key_exists($key, $filters) ) {
+    $filters = array($key => $filters[$key]) + $filters;
+  }
+  return $filters;
+}
+add_filter( 'tribe-events-bar-filters', 'fu_search_bar_order' );
