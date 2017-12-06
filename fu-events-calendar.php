@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   die( '-1' );
 }
 
+
 /**
  * Override Template Path
  * Adds plugin views folder to list of template paths
@@ -32,7 +33,6 @@ function fu_filter_template_paths ( $file, $template ) {
   if ( !file_exists($custom_file_path) ) return $file;
   return $custom_file_path;
 }
-add_filter( 'tribe_events_template', 'fu_filter_template_paths', 10, 2 );
 
 
 /**
@@ -48,11 +48,26 @@ function fu_list_structured_data() {
   global $wp_query;
   Tribe__Events__JSON_LD__Event::instance()->markup( $wp_query->posts );
 }
-add_action( 'wp_head', 'fu_list_structured_data');
 
 
-include( plugin_dir_path( __FILE__ ) . 'modules/custom-fields.php');
-include( plugin_dir_path( __FILE__ ) . 'modules/feed.php');
-include( plugin_dir_path( __FILE__ ) . 'modules/admin.php');
-include( plugin_dir_path( __FILE__ ) . 'modules/display.php');
-include( plugin_dir_path( __FILE__ ) . 'modules/search.php');
+/**
+ * Only run this plugin if TEC exists
+ */
+
+function fu_depend_on_tec() {
+  if ( class_exists( 'Tribe__Events__Main' ) ) {
+
+    add_filter('tribe_events_template', 'fu_filter_template_paths', 10, 2);
+    add_action('wp_head', 'fu_list_structured_data');
+
+    include(plugin_dir_path(__FILE__) . 'modules/custom-fields.php');
+    include(plugin_dir_path(__FILE__) . 'modules/feed.php');
+    include(plugin_dir_path(__FILE__) . 'modules/admin.php');
+    include(plugin_dir_path(__FILE__) . 'modules/display.php');
+    include(plugin_dir_path(__FILE__) . 'modules/search.php');
+    include(plugin_dir_path(__FILE__) . 'widgets/widgets.php');
+
+  }
+}
+add_action( 'plugins_loaded', 'fu_depend_on_tec' );
+
