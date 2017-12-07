@@ -64,8 +64,9 @@ function fu_depend_on_tec() {
     include(plugin_dir_path(__FILE__) . 'modules/feed.php');
     include(plugin_dir_path(__FILE__) . 'modules/admin.php');
     include(plugin_dir_path(__FILE__) . 'modules/display.php');
+    include(plugin_dir_path(__FILE__) . 'modules/list.php');
     include(plugin_dir_path(__FILE__) . 'modules/search.php');
-    include(plugin_dir_path(__FILE__) . 'widgets/widgets.php');
+    include(plugin_dir_path(__FILE__) . 'admin/widgets/widgets.php');
 
   }
 }
