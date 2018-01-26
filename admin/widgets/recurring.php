@@ -41,6 +41,7 @@ class Fu_Tec_Recurring_Widget extends WP_Widget {
     );
 
     $all_event_ids_in_recurrence_series = tribe_get_events( $recurrence_args );
+    if ( count( $all_event_ids_in_recurrence_series ) <= 1 ) return;
 
     echo $args['before_widget'];
     if ( !empty($title) ) echo $args['before_title'] . apply_filters( 'widget_title', $title ) . $args['after_title']; ?>
@@ -48,13 +49,12 @@ class Fu_Tec_Recurring_Widget extends WP_Widget {
     <ul>
 
     <?php
-    if ( count( $all_event_ids_in_recurrence_series ) <= 1 ) return;
-      foreach( $all_event_ids_in_recurrence_series as $key => $value ) {
-        if ( $event_id !== $value ) {
-          printf( '<li><a href="%s">%s</a></li>', esc_url( tribe_get_event_link( $value ) ), tribe_get_start_date( $value, false, tribe_get_date_format() ) );
-        }
+    foreach( $all_event_ids_in_recurrence_series as $key => $value ) {
+      if ( $event_id !== $value ) {
+        printf( '<li><a href="%s">%s</a></li>', esc_url( tribe_get_event_link( $value ) ), tribe_get_start_date( $value, false, tribe_get_date_format() ) );
       }
-      printf( '<li class="tribe-view-all-events"><a href="%s">%s</a></li>', esc_url( tribe_all_occurences_link( $event_id, false ) ), esc_html__( 'View All', 'the-events-calendar' ) );
+    }
+    printf( '<li class="tribe-view-all-events"><a href="%s">%s</a></li>', esc_url( tribe_all_occurences_link( $event_id, false ) ), esc_html__( 'View All', 'the-events-calendar' ) );
     ?>
 
     </ul>
