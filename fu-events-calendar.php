@@ -51,6 +51,16 @@ function fu_list_structured_data() {
 
 
 /**
+ * Activate cost admin field
+ *
+ * @author Michael Foley
+ *
+ */
+
+add_filter( 'tribe_events_admin_show_cost_field', '__return_true', 100 );
+
+
+/**
  * Only run this plugin if TEC exists
  */
 
