@@ -51,22 +51,13 @@ function fu_list_structured_data() {
 
 
 /**
- * Activate cost admin field
- *
- * @author Michael Foley
- *
- */
-
-add_filter( 'tribe_events_admin_show_cost_field', '__return_true', 100 );
-
-
-/**
  * Only run this plugin if TEC exists
  */
 
 function fu_depend_on_tec() {
   if ( class_exists( 'Tribe__Events__Main' ) ) {
 
+    add_filter('tribe_events_admin_show_cost_field', '__return_true', 100);
     add_filter('tribe_events_template', 'fu_filter_template_paths', 10, 2);
     add_action('wp_head', 'fu_list_structured_data');
 
@@ -76,6 +67,7 @@ function fu_depend_on_tec() {
     include(plugin_dir_path(__FILE__) . 'modules/display.php');
     include(plugin_dir_path(__FILE__) . 'modules/list.php');
     include(plugin_dir_path(__FILE__) . 'modules/search.php');
+    include(plugin_dir_path(__FILE__) . 'modules/community.php');
     include(plugin_dir_path(__FILE__) . 'admin/widgets/widgets.php');
 
   }
