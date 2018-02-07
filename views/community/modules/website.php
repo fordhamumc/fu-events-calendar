@@ -42,7 +42,7 @@ if ( ! $_POST ) {
 
 		<tr class="tribe-section-content-row">
 			<td class="tribe-section-content-label">
-				<?php tribe_community_events_field_label( 'EventURL', __( 'External Link:', 'tribe-events-community' ) ); ?>
+				<?php tribe_community_events_field_label( 'EventURL', __( 'Event Website:', 'tribe-events-community' ) ); ?>
 			</td>
 			<td class="tribe-section-content-field">
 				<input type="text" id="EventURL" name="EventURL" size="25" value="<?php echo esc_url( $event_url ); ?>" placeholder="<?php esc_attr_e( 'Enter URL for more event information', 'tribe-events-community' ); ?>" />
