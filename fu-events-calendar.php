@@ -61,6 +61,7 @@ function fu_depend_on_tec() {
     add_filter('tribe_events_template', 'fu_filter_template_paths', 10, 2);
     add_action('wp_head', 'fu_list_structured_data');
 
+    include(plugin_dir_path(__FILE__) . 'modules/taxonomy.php');
     include(plugin_dir_path(__FILE__) . 'modules/custom-fields.php');
     include(plugin_dir_path(__FILE__) . 'modules/feed.php');
     include(plugin_dir_path(__FILE__) . 'modules/admin.php');
@@ -73,4 +74,3 @@ function fu_depend_on_tec() {
   }
 }
 add_action( 'plugins_loaded', 'fu_depend_on_tec' );
-
