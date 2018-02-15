@@ -47,10 +47,6 @@ class Fu_Tec_Organizers_Widget extends WP_Widget {
           printf('<dt class="visuallyhidden">%s</dt>', esc_html__('Email: ', 'the-events-calendar'));
           printf('<dd class="tribe-organizer-email"><a href="mailto:%1$s">%1$s</a></dd>', esc_html($email));
         }
-        if ( !empty( $website ) ) {
-          printf('<dt class="visuallyhidden">%s</dt>', esc_html__('Website: ', 'the-events-calendar'));
-          printf('<dd class="tribe-organizer-url">%s</dd>', $website);
-        }
       }
 
       do_action( 'tribe_events_single_meta_organizer_section_end' );
