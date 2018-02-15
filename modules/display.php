@@ -12,11 +12,16 @@
  */
 
 function fu_remove_united_states_venue($venue_details){
-  $venue_details["address"] = str_replace("United States", "", $venue_details["address"]);
+  if ( is_array($venue_details) ) {
+    $address =& $venue_details["address"];
+  } else {
+    $address =& $venue_details;
+  }
+  $address = str_replace("United States", "", $address);
   return $venue_details;
 }
 add_filter( 'tribe_get_venue_details', 'fu_remove_united_states_venue' );
-
+add_filter( 'tribe_get_full_address', 'fu_remove_united_states_venue' );
 
 /**
  * Updates time to Fordham's style
