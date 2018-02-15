@@ -29,7 +29,7 @@ class Fu_Tec_Related_Widget extends WP_Widget {
     <ul class="tab-related-events posts-list">
       <?php foreach ( $posts as $post ) : ?>
       <li class="<?php tribe_events_event_classes() ?>">
-        <?php $thumb = ( has_post_thumbnail( $post->ID ) ) ? get_the_post_thumbnail( $post->ID, 'thumbnail' ) : '<img src="' . esc_url( trailingslashit( Tribe__Events__Pro__Main::instance()->pluginUrl ) . 'src/resources/images/tribe-related-events-placeholder.png' ) . '" alt="' . esc_attr( get_the_title( $post->ID ) ) . '" />'; ?>
+        <?php $thumb = ( has_post_thumbnail( $post->ID ) ) ? get_the_post_thumbnail( $post->ID, 'post-thumbnail' ) : '<img src="' . plugins_url('resources/images/tribe-related-events-placeholder.png', dirname(dirname(__FILE__)) ) . '" alt="' . esc_attr( get_the_title( $post->ID ) ) . '" />'; ?>
 
         <a href="<?php echo esc_url( tribe_get_event_link( $post ) ); ?>" class="url" rel="bookmark"><?php echo $thumb ?></a>
         <div class="content">
