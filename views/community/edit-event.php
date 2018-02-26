@@ -42,6 +42,8 @@ if ( ! isset( $tribe_event_id ) ) {
 
   <?php tribe_get_template_part( 'community/modules/taxonomy', null, array( 'taxonomy' => 'tribe_events_tag' ) ); ?>
 
+  <?php tribe_get_template_part( 'community/modules/taxonomy', null, array( 'taxonomy' => 'tribe_audience' ) ); ?>
+
   <?php tribe_get_template_part( 'community/modules/venue' ); ?>
 
   <?php tribe_get_template_part( 'community/modules/organizer' ); ?>

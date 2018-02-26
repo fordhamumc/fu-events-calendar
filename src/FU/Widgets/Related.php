@@ -1,7 +1,23 @@
 <?php
+/**
+ * Related Events Widget
+ *
+ * Creates a widget that displays related events
+ */
 
-class Fu_Tec_Related_Widget extends WP_Widget {
-  // php classnames and widget name/description added
+// Don't load directly
+if ( ! defined( 'ABSPATH' ) ) {
+  die( '-1' );
+}
+
+
+
+class FU__Events__Widgets__Related extends WP_Widget {
+
+  /**
+   * Adds classname and description
+   */
+
   function __construct() {
     $widget_options = array(
       'classname' => 'tribe-events-related-widget',
@@ -13,7 +29,13 @@ class Fu_Tec_Related_Widget extends WP_Widget {
       $widget_options
     );
   }
-  // create the widget output
+
+
+
+  /**
+   * Creates the widget output
+   */
+
   function widget( $args, $instance ) {
     if ( !is_single() || !tribe_is_event() ) return;
 
@@ -29,8 +51,7 @@ class Fu_Tec_Related_Widget extends WP_Widget {
     <ul class="tab-related-events posts-list">
       <?php foreach ( $posts as $post ) : ?>
       <li class="<?php tribe_events_event_classes() ?>">
-        <?php $thumb = ( has_post_thumbnail( $post->ID ) ) ? get_the_post_thumbnail( $post->ID, 'post-thumbnail' ) : '<img src="' . plugins_url('resources/images/tribe-related-events-placeholder.png', dirname(dirname(__FILE__)) ) . '" alt="' . esc_attr( get_the_title( $post->ID ) ) . '" />'; ?>
-
+        <?php $thumb = ( has_post_thumbnail( $post->ID ) ) ? get_the_post_thumbnail( $post->ID, 'post-thumbnail' ) : '<img src="' . esc_url( trailingslashit( tribe('fu.main')->plugin_url ) . 'resources/images/tribe-related-events-placeholder.png' ) . '" alt="' . esc_attr( get_the_title( $post->ID ) ) . '" />'; ?>
         <a href="<?php echo esc_url( tribe_get_event_link( $post ) ); ?>" class="url" rel="bookmark"><?php echo $thumb ?></a>
         <div class="content">
           <?php
@@ -49,6 +70,13 @@ class Fu_Tec_Related_Widget extends WP_Widget {
     <?php
     echo $args['after_widget'];
   }
+
+
+
+  /**
+   * Creates the settings form
+   */
+
   function form( $instance ) {
     $title = ! empty( $instance['title'] ) ? $instance['title'] : '';
     $count = ! empty( $instance['count'] ) ? $instance['count'] : '3'; ?>
@@ -66,7 +94,13 @@ class Fu_Tec_Related_Widget extends WP_Widget {
     </p>
     <p>This will only be visible on single event pages.</p>
   <?php }
-  // Update database with new info
+
+
+
+  /**
+   * Updates the widget settings
+   */
+
   function update( $new_instance, $old_instance ) {
     $instance = $old_instance;
     $instance[ 'title' ] = strip_tags( $new_instance[ 'title' ] );

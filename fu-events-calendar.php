@@ -3,74 +3,65 @@
 Plugin Name: Fordham Events Calendar Edits
 Plugin URI: http://news.fordham.edu
 Description: Customizations for Modern Tribe's The Events Calendar
-Version: 1.0.0
+Version: 2.0.0
 Author: Michael Foley
 Author URI: http://michaeldfoley.com
 License: MIT
 Text Domain: fu-events-calendar
 */
 
-if ( ! defined( 'ABSPATH' ) ) {
-  die( '-1' );
-}
-
+define( 'FU_EVENTS_DIR', dirname( __FILE__ ) );
+define( 'FU_EVENTS_FILE', __FILE__ );
 
 /**
- * Override Template Path
- * Adds plugin views folder to list of template paths
- *
- * @author Michael Foley
- *
- * @var string $file
- * @var string $template
- *
- * @return string
+ * Instantiate class
  *
  */
 
-function fu_filter_template_paths ( $file, $template ) {
-  $custom_file_path = plugin_dir_path( __FILE__ ) . 'views/' . $template;
-  if ( !file_exists($custom_file_path) ) return $file;
-  return $custom_file_path;
+function fu_events_load() {
+  fu_events_autoloading();
+
+  $classes_exist = class_exists( 'Tribe__Events__Main' ) && class_exists( 'FU__Events__Main' );
+  $version_ok = $classes_exist && defined( 'Tribe__Events__Main::VERSION' ) && version_compare( Tribe__Events__Main::VERSION, FU__Events__Main::REQUIRED_TEC_VERSION, '>=' );
+
+  if ( ! $version_ok ) {
+    add_action( 'admin_notices', 'fu_show_fail_message' );
+    return;
+  }
+
+  tribe_singleton( 'fu.main', new FU__Events__Main() );
+}
+add_action( 'plugins_loaded', 'fu_events_load', 2 );
+
+
+function fu_events_autoloading() {
+  if ( ! class_exists( 'Tribe__Autoloader' ) ) {
+    return;
+  }
+
+  $autoloader = Tribe__Autoloader::instance();
+  $autoloader->register_prefix( 'FU__Events__', dirname( __FILE__ ) . '/src/FU' );
+  $autoloader->register_autoloader();
 }
 
-
 /**
- * Add structured data to list view
- *
- * @author Michael Foley
+ * Shows message if the plugin can't load due to TEC not being installed.
  *
  */
 
-function fu_list_structured_data() {
-  if ( !tribe_is_list_view() ) return;
-
-  global $wp_query;
-  Tribe__Events__JSON_LD__Event::instance()->markup( $wp_query->posts );
-}
-
-
-/**
- * Only run this plugin if TEC exists
- */
-
-function fu_depend_on_tec() {
-  if ( class_exists( 'Tribe__Events__Main' ) ) {
-
-    add_filter('tribe_events_admin_show_cost_field', '__return_true', 100);
-    add_filter('tribe_events_template', 'fu_filter_template_paths', 10, 2);
-    add_action('wp_head', 'fu_list_structured_data');
-
-    include(plugin_dir_path(__FILE__) . 'modules/taxonomy.php');
-    include(plugin_dir_path(__FILE__) . 'modules/custom-fields.php');
-    include(plugin_dir_path(__FILE__) . 'modules/feed.php');
-    include(plugin_dir_path(__FILE__) . 'modules/admin.php');
-    include(plugin_dir_path(__FILE__) . 'modules/display.php');
-    include(plugin_dir_path(__FILE__) . 'modules/list.php');
-    include(plugin_dir_path(__FILE__) . 'modules/search.php');
-    include(plugin_dir_path(__FILE__) . 'modules/community.php');
-    include(plugin_dir_path(__FILE__) . 'admin/widgets/widgets.php');
-
+function fu_show_fail_message() {
+  if ( current_user_can( 'activate_plugins' ) ) {
+    $url = 'plugin-install.php?tab=plugin-information&plugin=the-events-calendar&TB_iframe=true';
+    $title = __( 'The Events Calendar', 'fu-events-community' );
+    echo '<div class="error"><p>' . sprintf( __( 'To begin using Fordham Events Calendar Edits, please install the latest version of <a href="%1$s" class="thickbox" title="%2$s">%2$s</a>.', 'fu-events-community' ), esc_url( $url ), $title ) . '</p></div>';
   }
 }
-add_action( 'plugins_loaded', 'fu_depend_on_tec' );
+
+register_activation_hook( FU_EVENTS_FILE, 'fu_activate' );
+function fu_activate() {
+  fu_events_autoloading();
+  if ( ! class_exists( 'FU__Events__Main' ) ) {
+    return;
+  }
+  FU__Events__Main::activateFlushRewrite();
+}

@@ -1,7 +1,23 @@
 <?php
+/**
+ * Organizers Widget
+ *
+ * Creates a widget that displays the organizer(s) for a single event
+ */
 
-class Fu_Tec_Organizers_Widget extends WP_Widget {
-  // php classnames and widget name/description added
+// Don't load directly
+if ( ! defined( 'ABSPATH' ) ) {
+  die( '-1' );
+}
+
+
+
+class FU__Events__Widgets__Organizers extends WP_Widget {
+
+  /**
+   * Adds classname and description
+   */
+
   function __construct() {
     $widget_options = array(
       'classname' => 'tribe-events-organizers-widget',
@@ -13,7 +29,13 @@ class Fu_Tec_Organizers_Widget extends WP_Widget {
       $widget_options
     );
   }
-  // create the widget output
+
+
+
+  /**
+   * Creates the widget output
+   */
+
   function widget( $args, $instance ) {
     if ( !is_single() || !tribe_is_event() ) return;
 
@@ -56,6 +78,13 @@ class Fu_Tec_Organizers_Widget extends WP_Widget {
     <?php
     echo $args['after_widget'];
   }
+
+
+
+  /**
+   * Creates the settings form
+   */
+
   function form( $instance ) {
     $title = ! empty( $instance['title'] ) ? $instance['title'] : '';
     $titlesingle = ! empty( $instance['titlesingle'] ) ? $instance['titlesingle'] : ''; ?>
@@ -73,7 +102,13 @@ class Fu_Tec_Organizers_Widget extends WP_Widget {
     </p>
     <p>This will only be visible on single event pages.</p>
   <?php }
-  // Update database with new info
+
+
+
+  /**
+   * Updates the widget settings
+   */
+
   function update( $new_instance, $old_instance ) {
     $instance = $old_instance;
     $instance[ 'title' ] = strip_tags( $new_instance[ 'title' ] );
