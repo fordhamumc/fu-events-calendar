@@ -15,7 +15,7 @@ if ( ! class_exists( 'FU__Events__Community' ) ) {
   class FU__Events__Community {
 
     public function hooks() {
-      add_action( 'tribe_events_community_template', array($this, 'custom_message'), 100 );
+      add_action( 'tribe_community_before_event_page', array($this, 'custom_message'), 100 );
     }
 
 
@@ -28,7 +28,7 @@ if ( ! class_exists( 'FU__Events__Community' ) ) {
 
     public function custom_message() {
       if ( filter_input( INPUT_GET, 'acal', FILTER_VALIDATE_BOOLEAN ) ) {
-        tribe( 'community.main' )->enqueueOutputMessage( __( 'We have upgraded to a new calendar. Please use the form below to submit your events.', 'fu-events-calendar' ) );
+        tribe( 'community.main' )->enqueueOutputMessage( __( 'We have upgraded to a new calendar. Please use the form below to submit your events.', 'fu-events-calendar' ), 'warn' );
       }
     }
 
