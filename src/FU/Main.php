@@ -314,7 +314,7 @@ if ( ! class_exists( 'FU__Events__Main' ) ) {
 
     /**
      * Override event archive api
-     * @since 2.0
+     * @since 2.0.1
      *
      * @param bool    $register_routes    Whether routes for the endpoint should be registered or not.
      *

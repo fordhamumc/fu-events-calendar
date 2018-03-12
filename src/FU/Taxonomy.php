@@ -56,6 +56,7 @@ if ( ! class_exists( 'FU__Events__Taxonomy' ) ) {
       add_action( 'init', array($this, 'create_custom_taxonomy'), 0);
       add_action( 'init', array($this, 'custom_rewrite') );
       add_action( 'init', array($this, 'remove_tags'), 100 );
+      add_filter( 'tribe_get_events_title', array($this, 'archive_title'), 10, 2 );
       add_filter( 'tribe_events_listview_ajax_get_event_args', array($this, 'listview_ajax_tag') );
       add_filter( 'tribe_rest_event_data', array($this, 'rest_event_data'), 10, 2);
       add_filter( 'tribe_rest_taxonomy_term_data', array($this, 'rest_taxonomy_term_data'), 10, 2);
@@ -106,6 +107,29 @@ if ( ! class_exists( 'FU__Events__Taxonomy' ) ) {
       foreach( $this->remove_taxonomy as $post_type => $taxonomy ) {
         unregister_taxonomy_for_object_type( $taxonomy, $post_type );
       }
+    }
+
+
+
+
+    /**
+     * Display taxonomy name in archive page title
+     * @since 2.0.2
+     *
+     * @param string    $title    The title
+     * @param bool      $depth    Include linked title
+     *
+     * @return string
+     *
+     */
+
+    public function archive_title($title, $depth) {
+      if ( is_tax( $this->taxonomy ) && $depth ) {
+        $cat = get_queried_object();
+        $title = '<a href="' . esc_url( tribe_get_events_link() ) . '">' . $title . '</a>';
+        $title .= ' &#8250; ' . $cat->name;
+      }
+      return $title;
     }
 
 
