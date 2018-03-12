@@ -60,7 +60,6 @@ if ( ! class_exists( 'FU__Events__Taxonomy' ) ) {
       add_filter( 'tribe_rest_event_data', array($this, 'rest_event_data'), 10, 2);
       add_filter( 'tribe_rest_taxonomy_term_data', array($this, 'rest_taxonomy_term_data'), 10, 2);
       add_action( 'rest_api_init', array($this, 'rest_register_event_tags_endpoint') );
-
     }
 
 
@@ -71,7 +70,7 @@ if ( ! class_exists( 'FU__Events__Taxonomy' ) ) {
      *
      */
 
-    function create_custom_taxonomy() {
+    public function create_custom_taxonomy() {
       register_taxonomy( $this->taxonomy, array_keys($this->object_type), $this->args );
     }
 
@@ -84,7 +83,7 @@ if ( ! class_exists( 'FU__Events__Taxonomy' ) ) {
      *
      */
 
-    function custom_rewrite() {
+    public function custom_rewrite() {
       if (!$this->slug) return;
 
       foreach( $this->object_type as $post_type => $slug_dir ) {
@@ -103,7 +102,7 @@ if ( ! class_exists( 'FU__Events__Taxonomy' ) ) {
      *
      */
 
-    function remove_tags() {
+    public function remove_tags() {
       foreach( $this->remove_taxonomy as $post_type => $taxonomy ) {
         unregister_taxonomy_for_object_type( $taxonomy, $post_type );
       }
@@ -121,7 +120,7 @@ if ( ! class_exists( 'FU__Events__Taxonomy' ) ) {
      * @return array
      */
 
-    function listview_ajax_tag($args) {
+    public function listview_ajax_tag($args) {
       if (!$this->slug) return $args;
 
       $referrer = parse_url(wp_get_referer());
@@ -145,8 +144,6 @@ if ( ! class_exists( 'FU__Events__Taxonomy' ) ) {
     }
 
 
-
-
     /**
      * Adds the taxonomy to the REST event api
      * @since 2.0
@@ -158,7 +155,7 @@ if ( ! class_exists( 'FU__Events__Taxonomy' ) ) {
      *
      */
 
-    function rest_event_data($data, $event) {
+    public function rest_event_data($data, $event) {
       $data[$this->slug] = tribe('tec.rest-v1.repository')->get_terms( $event->ID, $this->taxonomy );
 
       if ( array_key_exists(Tribe__Events__Main::POSTTYPE, $this->remove_taxonomy) ) {
@@ -184,7 +181,7 @@ if ( ! class_exists( 'FU__Events__Taxonomy' ) ) {
      *
      */
 
-    function rest_taxonomy_term_data($term_data, $taxonomy) {
+    public function rest_taxonomy_term_data($term_data, $taxonomy) {
       if ( $taxonomy === $this->taxonomy ) {
         $term_data['urls'] = array(
           'self'       => tribe_events_rest_url( "{$this->slug}/{$term_data['id']}" ),
@@ -208,7 +205,7 @@ if ( ! class_exists( 'FU__Events__Taxonomy' ) ) {
      * @param bool $register_routes Whether routes for the endpoint should be registered or not.
      */
 
-    function rest_register_event_tags_endpoint( $register_routes = true ) {
+    public function rest_register_event_tags_endpoint( $register_routes = true ) {
       global $wp_version;
       $system           = tribe( 'tec.rest-v1.system' );
 

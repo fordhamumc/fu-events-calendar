@@ -94,6 +94,10 @@ if ( ! class_exists( 'FU__Events__Main' ) ) {
       add_filter( 'fu_events_single_event_time_formatted', array($this, 'update_time'), 10, 2);
 
 
+      //add_filter( 'rest_post_dispatch', array($this, 'add_custom_taxonomy_rest_query'), 10, 3);
+      add_action( 'rest_api_init', array( $this, 'register_event_archives_endpoint' ) );
+
+
       $this->plugin_file = FU_EVENTS_FILE;
       $this->plugin_path = trailingslashit( dirname( $this->plugin_file ) );
       $this->plugin_dir = trailingslashit( basename( $this->plugin_path ) );
@@ -273,7 +277,7 @@ if ( ! class_exists( 'FU__Events__Main' ) ) {
 
 
     /**
-     * Add Events Tag to Ajax methods
+     * Add custom taxonomies to REST api
      * @since 2.0
      *
      */
@@ -304,6 +308,36 @@ if ( ! class_exists( 'FU__Events__Main' ) ) {
         array( Tribe__Events__Main::POSTTYPE => $tec->getRewriteSlug() ),
         array( 'labels' => $audience_labels, 'rewrite' => array( 'slug' => 'audience' ) )
       );
+    }
+
+
+
+    /**
+     * Override event archive api
+     * @since 2.0
+     *
+     * @param bool    $register_routes    Whether routes for the endpoint should be registered or not.
+     *
+     */
+
+    public function register_event_archives_endpoint( $register_routes = true ) {
+      $tec              = tribe( 'tec.main' );
+      $main             = tribe( 'tec.rest-v1.main' );
+      $messages = tribe( 'tec.rest-v1.messages' );
+      $post_repository = tribe( 'tec.rest-v1.repository' );
+      $validator = tribe( 'tec.rest-v1.validator' );
+      $endpoint = new FU__Events__REST__V1__Endpoints__Archive_Event( $messages, $post_repository, $validator );
+      $namespace = $main->get_namespace() . '/' . $tec->getRewriteSlug() . '/' . $main->get_version();
+
+      if ( $register_routes ) {
+        register_rest_route( $namespace, '/events', array(
+          'methods'  => WP_REST_Server::READABLE,
+          'callback' => array( $endpoint, 'get' ),
+          'args'     => $endpoint->READ_args(),
+        ), true );
+      }
+
+      tribe( 'tec.rest-v1.endpoints.documentation' )->register_documentation_provider( '/events', $endpoint );
     }
 
 
