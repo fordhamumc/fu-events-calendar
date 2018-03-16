@@ -57,6 +57,7 @@ if ( ! class_exists( 'FU__Events__Taxonomy' ) ) {
       add_action( 'init', array($this, 'custom_rewrite') );
       add_action( 'init', array($this, 'remove_tags'), 100 );
       add_filter( 'tribe_get_events_title', array($this, 'archive_title'), 10, 2 );
+      add_filter( 'tribe_community_events_allowed_taxonomies', array($this, 'allow_community_taxonomy' ) );
       add_filter( 'tribe_events_listview_ajax_get_event_args', array($this, 'listview_ajax_tag') );
       add_filter( 'tribe_rest_event_data', array($this, 'rest_event_data'), 10, 2);
       add_filter( 'tribe_rest_taxonomy_term_data', array($this, 'rest_taxonomy_term_data'), 10, 2);
@@ -107,6 +108,26 @@ if ( ! class_exists( 'FU__Events__Taxonomy' ) ) {
       foreach( $this->remove_taxonomy as $post_type => $taxonomy ) {
         unregister_taxonomy_for_object_type( $taxonomy, $post_type );
       }
+    }
+
+
+
+    /**
+     * Allow tags to be added via the community form
+     * @since 2.0.3
+     *
+     * @param array    $taxonomies    The currently allowed taxonomies
+     *
+     * @return array
+     *
+     */
+
+    public function allow_community_taxonomy($taxonomies) {
+      foreach( $this->remove_taxonomy as $old_taxonomy ) {
+        unset($taxonomies[$old_taxonomy]);
+      }
+      $taxonomies[] = $this->taxonomy;
+      return $taxonomies;
     }
 
 
