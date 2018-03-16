@@ -14,10 +14,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'FU__Events__Admin' ) ) {
   class FU__Events__Admin {
 
-    public function hooks() {
+
+    /**
+     * Class constructor
+     * @since 2.0.3
+     *
+     */
+
+    public function __construct() {
       add_filter('manage_tribe_venue_posts_columns', array($this, 'venue_columns_head') );
       add_action('manage_tribe_venue_posts_custom_column', array($this, 'venue_columns_content'), 10, 2);
     }
+
+
+
     /**
      * Add event counts header to event venue admin page
      * @since 1.0

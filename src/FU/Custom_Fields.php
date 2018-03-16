@@ -14,7 +14,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'FU__Events__Custom_Fields' ) ) {
   class FU__Events__Custom_Fields {
 
-    public function hooks() {
+
+    /**
+     * Class constructor
+     * @since 2.0.3
+     *
+     */
+
+    public function __construct() {
       add_filter('tribe_events_community_custom_fields', array($this, 'update_custom_fields'), 10, 2);
       add_filter('tribe_get_event_link', array($this, 'redirect_link'), 10, 2);
       add_filter('tribe_events_community_custom_field_value', array($this, 'custom_field_defaults'), 10, 3);

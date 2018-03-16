@@ -14,7 +14,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'FU__Events__Feed' ) ) {
   class FU__Events__Feed {
 
-    public function hooks() {
+
+    /**
+     * Class constructor
+     * @since 2.0.3
+     *
+     */
+
+    public function __construct() {
       add_filter( 'the_excerpt_rss', array($this, 'custom_event_feed') );
     }
 

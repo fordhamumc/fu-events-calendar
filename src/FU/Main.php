@@ -86,16 +86,13 @@ if ( ! class_exists( 'FU__Events__Main' ) ) {
       add_action( 'admin_init', array( $this, 'maybeFlushRewriteRules' ) );
       add_action( 'wp_head', array($this, 'list_structured_data') );
       add_action( 'widgets_init', array($this, 'register_widgets'), 90 );
+      add_action( 'rest_api_init', array( $this, 'register_event_archives_endpoint' ) );
       add_filter( 'tribe_events_admin_show_cost_field', '__return_true', 100 );
       add_filter( 'tribe_events_template', array($this, 'filter_template_paths'), 10, 2 );
       add_filter( 'tribe_get_venue_details', array($this, 'remove_united_states') );
       add_filter( 'tribe_get_full_address', array($this, 'remove_united_states') );
       add_filter( 'tribe_events_event_schedule_details_inner', array($this, 'update_time'), 10, 2);
       add_filter( 'fu_events_single_event_time_formatted', array($this, 'update_time'), 10, 2);
-
-
-      //add_filter( 'rest_post_dispatch', array($this, 'add_custom_taxonomy_rest_query'), 10, 3);
-      add_action( 'rest_api_init', array( $this, 'register_event_archives_endpoint' ) );
 
 
       $this->plugin_file = FU_EVENTS_FILE;
@@ -106,13 +103,6 @@ if ( ! class_exists( 'FU__Events__Main' ) ) {
 
       $this->bind_implementations();
       $this->setup_custom_taxonomies();
-
-
-      tribe('fu.admin')->hooks();
-      tribe('fu.community')->hooks();
-      tribe('fu.custom-fields')->hooks();
-      tribe('fu.feed')->hooks();
-      tribe('fu.list')->hooks();
     }
 
 
@@ -364,11 +354,12 @@ if ( ! class_exists( 'FU__Events__Main' ) ) {
      */
 
     public function bind_implementations() {
-      tribe_singleton('fu.admin', 'FU__Events__Admin');
-      tribe_singleton('fu.community', 'FU__Events__Community');
-      tribe_singleton('fu.custom-fields', 'FU__Events__Custom_Fields');
-      tribe_singleton('fu.feed', 'FU__Events__Feed');
-      tribe_singleton('fu.list', 'FU__Events__List');
+      tribe_singleton('fu.admin', new FU__Events__Admin);
+      tribe_singleton('fu.community', new FU__Events__Community);
+      tribe_singleton('fu.custom-fields', new FU__Events__Custom_Fields);
+      tribe_singleton('fu.feed', new FU__Events__Feed);
+      tribe_singleton('fu.list', new FU__Events__List);
+      tribe_singleton('fu.register', new FU__Events__Register);
     }
   }
 }

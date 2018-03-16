@@ -59,6 +59,7 @@ if ( ! class_exists( 'FU__Events__Taxonomy' ) ) {
       add_filter( 'tribe_get_events_title', array($this, 'archive_title'), 10, 2 );
       add_filter( 'tribe_community_events_allowed_taxonomies', array($this, 'allow_community_taxonomy' ) );
       add_filter( 'tribe_events_listview_ajax_get_event_args', array($this, 'listview_ajax_tag') );
+      add_filter( 'tribe_community_events_allowed_taxonomies', array($this, 'allow_community_taxonomy' ) );
       add_filter( 'tribe_rest_event_data', array($this, 'rest_event_data'), 10, 2);
       add_filter( 'tribe_rest_taxonomy_term_data', array($this, 'rest_taxonomy_term_data'), 10, 2);
       add_action( 'rest_api_init', array($this, 'rest_register_event_tags_endpoint') );

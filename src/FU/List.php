@@ -14,7 +14,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'FU__Events__List' ) ) {
   class FU__Events__List {
 
-    public function hooks() {
+
+    /**
+     * Class constructor
+     * @since 2.0.3
+     *
+     */
+
+    public function __construct() {
       add_filter( 'tribe_events_after_the_title', array($this, 'add_submit_button') );
       add_filter( 'tribe-events-bar-filters', array($this, 'search_bar_order') );
       add_filter( 'tribe_events_recurrence_tooltip', array($this, 'remove_recurring_event_label') );
