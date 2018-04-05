@@ -131,7 +131,7 @@ if ( ! class_exists( 'FU__Events__Custom_Fields' ) ) {
      */
 
     public function redirect_link($link, $post_id) {
-      $event_url = tribe_get_event_website_url();
+      $event_url = tribe_get_event_website_url($post_id);
       $redirect = !!Tribe__Events__Pro__Custom_Meta::get_custom_field_by_label('Redirect to Event Website', $post_id);
       if ($redirect && $event_url) {
         return preg_replace('#(http|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+\#-]*[\w@?^=%&/~+\#-])?#', $event_url, $link);
