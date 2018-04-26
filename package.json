@@ -1,0 +1,28 @@
+{
+  "name": "fu-events-calendar",
+  "description": "Customizations for Modern Tribe's The Events Calendar",
+  "version": "2.0.4",
+  "keywords": [
+    "wordpress",
+    "modern tribe",
+    "the events calendar"
+  ],
+  "author": {
+    "name": "Michael Foley",
+    "web": "https://michaeldfoley.com"
+  },
+  "bugs": {
+    "web": "https://github.com/fordhamumc/fu-events-calendar/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:fordhamumc/fu-events-calendar.git"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "node-wp-i18n": "^1.1.1"
+  },
+  "scripts": {
+    "localize": "wpi18n makepot --domain-path /languages --main-file fu-events-calendar.php --type wp-plugin --include src/.*,views/.*"
+  }
+}

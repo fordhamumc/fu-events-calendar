@@ -1,13 +1,16 @@
 <?php
-/*
-Plugin Name: Fordham Events Calendar Edits
-Plugin URI: http://news.fordham.edu
-Description: Customizations for Modern Tribe's The Events Calendar
-Version: 2.0.3
-Author: Michael Foley
-Author URI: http://michaeldfoley.com
-License: MIT
-Text Domain: fu-events-calendar
+/**
+ * @wordpress-plugin
+ * Plugin Name:       Fordham Events Calendar Edits
+ * Plugin URI:        http://news.fordham.edu
+ * Description:       Customizations for Modern Tribe's The Events Calendar
+ * Version:           2.0.4
+ * Author:            Michael Foley
+ * Author URI:        http://michaeldfoley.com
+ * License:           MIT
+ * License URI:       https://opensource.org/licenses/MIT
+ * Text Domain:       fu-events-calendar
+ * Domain Path:       /languages
 */
 
 define( 'FU_EVENTS_DIR', dirname( __FILE__ ) );

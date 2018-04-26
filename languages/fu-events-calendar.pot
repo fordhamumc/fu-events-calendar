@@ -1,0 +1,211 @@
+# Copyright (C) 2018 Michael Foley
+# This file is distributed under the MIT.
+msgid ""
+msgstr ""
+"Project-Id-Version: Fordham Events Calendar Edits 2.0.4\n"
+"Report-Msgid-Bugs-To: "
+"https://wordpress.org/support/plugin/fu-events-calendar\n"
+"POT-Creation-Date: 2018-04-26 18:38:02+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: node-wp-i18n 1.1.1\n"
+
+#: fu-events-calendar.php:58
+msgid "The Events Calendar"
+msgstr ""
+
+#: fu-events-calendar.php:59
+msgid ""
+"To begin using Fordham Events Calendar Edits, please install the latest "
+"version of <a href=\"%1$s\" class=\"thickbox\" title=\"%2$s\">%2$s</a>."
+msgstr ""
+
+#: fu-events-calendar.php:83
+msgid "Event Submitter"
+msgstr ""
+
+#: src/FU/Community.php:39
+msgid ""
+"We have upgraded to a new calendar. Please use the form below to submit "
+"your events."
+msgstr ""
+
+#: src/FU/Community.php:43
+msgid "Success! Please login to add an event."
+msgstr ""
+
+#: src/FU/List.php:43
+msgid "Submit an Event"
+msgstr ""
+
+#: src/FU/Main.php:280
+msgid "Event Tags"
+msgstr ""
+
+#: src/FU/Main.php:286
+msgid "Audience"
+msgstr ""
+
+#: src/FU/REST/V1/Endpoints/Single_Tag.php:111
+msgid "the event tag term ID"
+msgstr ""
+
+#: src/FU/Register.php:55
+msgid "Minimum: 8 characters, 1 letter, and 1 number."
+msgstr ""
+
+#: src/FU/Register.php:68
+msgid "register"
+msgstr ""
+
+#: src/FU/Register.php:124
+msgid "Create an Account"
+msgstr ""
+
+#: src/FU/Register.php:216
+msgid "Don't have an account?"
+msgstr ""
+
+#: src/FU/Register.php:218
+msgid "Sign Up"
+msgstr ""
+
+#: src/FU/Register.php:222
+msgid "Forgot password?"
+msgstr ""
+
+#: src/FU/Register.php:426
+msgid "Required form field is missing."
+msgstr ""
+
+#: src/FU/Register.php:470 src/FU/Register.php:507
+msgid "The %s you entered is not valid."
+msgstr ""
+
+#: src/FU/Register.php:474
+msgid "That %s is already in use."
+msgstr ""
+
+#: src/FU/Register.php:499
+msgid "%s is too short. At least 4 characters are required."
+msgstr ""
+
+#: src/FU/Register.php:503
+msgid "That %s already exists."
+msgstr ""
+
+#: src/FU/Register.php:533
+msgid "%s is too short. At least 8 characters are required."
+msgstr ""
+
+#: src/FU/Register.php:537
+msgid "%s must include at least one number."
+msgstr ""
+
+#: src/FU/Register.php:541
+msgid "%s must include at least one letter."
+msgstr ""
+
+#: src/FU/Widgets/Organizers.php:65
+msgid "Phone: "
+msgstr ""
+
+#: src/FU/Widgets/Organizers.php:69
+msgid "Email: "
+msgstr ""
+
+#: src/FU/Widgets/Organizers.php:93 src/FU/Widgets/Recurring.php:99
+#: src/FU/Widgets/Related.php:85 src/FU/Widgets/iCal.php:73
+msgid "Title: "
+msgstr ""
+
+#: src/FU/Widgets/Organizers.php:99
+msgid "Title (Single): "
+msgstr ""
+
+#: src/FU/Widgets/Recurring.php:79
+msgid "View All"
+msgstr ""
+
+#: src/FU/Widgets/Recurring.php:105 src/FU/Widgets/Related.php:91
+msgid "Posts: "
+msgstr ""
+
+#: src/FU/Widgets/iCal.php:49
+msgid "Export Events"
+msgstr ""
+
+#: src/FU/Widgets/iCal.php:50
+msgid ""
+"Use this to share calendar data with Google Calendar, Apple iCal and other "
+"compatible apps"
+msgstr ""
+
+#: views/community/modules/custom-item.php:43
+msgid "None"
+msgstr ""
+
+#: views/community/modules/custom.php:32
+msgid "Additional Fields"
+msgstr ""
+
+#: views/community/modules/website.php:27
+msgid "%s Website"
+msgstr ""
+
+#: views/community/modules/website.php:45
+msgid "Event Website:"
+msgstr ""
+
+#: views/community/modules/website.php:48
+msgid "Enter URL for more event information"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Fordham Events Calendar Edits"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://news.fordham.edu"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Customizations for Modern Tribe's The Events Calendar"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Michael Foley"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://michaeldfoley.com"
+msgstr ""
+
+#: src/FU/Main.php:278
+msgctxt "Taxonomy General Name"
+msgid "Event Tags"
+msgstr ""
+
+#: src/FU/Main.php:284
+msgctxt "Taxonomy General Name"
+msgid "Audiences"
+msgstr ""
+
+#: src/FU/Main.php:279
+msgctxt "Taxonomy Singular Name"
+msgid "Event Tag"
+msgstr ""
+
+#: src/FU/Main.php:285
+msgctxt "Taxonomy Singular Name"
+msgid "Audience"
+msgstr ""
+
+#: views/community/modules/custom-item.php:56
+msgctxt "custom field label"
+msgid "%s:"
+msgstr ""
