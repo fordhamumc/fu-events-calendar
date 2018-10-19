@@ -93,6 +93,7 @@ if ( ! class_exists( 'FU__Events__Main' ) ) {
       add_filter( 'tribe_get_full_address', array($this, 'remove_united_states') );
       add_filter( 'tribe_events_event_schedule_details_inner', array($this, 'update_time'), 10, 2);
       add_filter( 'fu_events_single_event_time_formatted', array($this, 'update_time'), 10, 2);
+      add_filter( 'tribe_get_map_link_html', array($this, 'map_link'));
 
 
       $this->plugin_file = FU_EVENTS_FILE;
@@ -247,6 +248,22 @@ if ( ! class_exists( 'FU__Events__Main' ) ) {
         $inner = preg_replace('# [ap]\.m\.#', '', $inner, 1);
       }
       return $inner;
+    }
+
+
+
+    /**
+     * Remove target=_blank from google maps link
+     *
+     * @since 2.0.5
+     * @param string    $link       google maps link
+     *
+     * @return string
+     *
+     */
+
+    public function map_link($link) {
+        return str_replace(" target=\"_blank\"", "", $link);
     }
 
 
