@@ -4,7 +4,7 @@
  * Plugin Name:       Fordham Events Calendar Edits
  * Plugin URI:        http://news.fordham.edu
  * Description:       Customizations for Modern Tribe's The Events Calendar
- * Version:           2.0.4
+ * Version:           2.0.5
  * Author:            Michael Foley
  * Author URI:        http://michaeldfoley.com
  * License:           MIT

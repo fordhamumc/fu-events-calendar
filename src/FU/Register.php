@@ -44,6 +44,7 @@ if ( ! class_exists( 'FU__Events__Register' ) ) {
       add_action( 'init', array( $this, 'init' ) );
       add_action( 'wp_router_generate_routes', array( $this, 'addRoutes' ) );
       add_action( 'wp_enqueue_scripts', array( 'Tribe__Events__Community__Main', 'enqueue_assets' ), 20 );
+      add_action( 'tribe_community_before_login_form', array( $this, 'redirect' ) );
       add_action( 'tribe_community_before_login_form', array( $this, 'add_header' ) );
       add_action( 'tribe_community_after_login_form', array( $this, 'add_login_footer' ) );
       add_action( 'tribe_ce_before_event_registration_page', array( $this, 'add_header' ) );
@@ -128,7 +129,6 @@ if ( ! class_exists( 'FU__Events__Register' ) ) {
 
 
 
-
     /**
      * Display registration form
      * @since 2.0.3
@@ -173,6 +173,18 @@ if ( ! class_exists( 'FU__Events__Register' ) ) {
       $path = $tce->getCommunityRewriteSlug() . '/' . $rewrite_slugs[$slug];
 
       return ( $home_url ) ? home_url( $path ) : $path;
+    }
+
+
+
+
+    /**
+     * Redirect to login page
+     * @since 2.0.5
+     *
+     */
+    public function redirect() {
+      auth_redirect();
     }
 
 
