@@ -22,6 +22,7 @@ if ( ! class_exists( 'FU__Events__Admin' ) ) {
      */
 
     public function __construct() {
+      add_action( 'init', array( $this, 'events_sidebar_menu') );
       add_filter('manage_tribe_venue_posts_columns', array($this, 'venue_columns_head') );
       add_action('manage_tribe_venue_posts_custom_column', array($this, 'venue_columns_content'), 10, 2);
     }
@@ -66,5 +67,16 @@ if ( ! class_exists( 'FU__Events__Admin' ) ) {
         echo $q->post_count;
       }
     }
+
+
+      /**
+       * Add events sidebar menu area
+       * @since 2.0.6
+       *
+       */
+
+      public function events_sidebar_menu() {
+          register_nav_menu( 'fu-events-sidebar', __('The Events Calendar Sidebar Menu', 'fu-events-calendar') );
+      }
   }
 }
