@@ -15,10 +15,10 @@ if ( ! class_exists( 'FU__Events__Main' ) ) {
   class FU__Events__Main {
 
     /**
-     * The current version of Community Events
+     * The current version of Custom Events
      */
 
-    const VERSION = '2.0.0';
+    const VERSION = '2.0.5';
 
     /**
      * Required The Events Calendar Version
@@ -376,6 +376,7 @@ if ( ! class_exists( 'FU__Events__Main' ) ) {
       tribe_singleton('fu.custom-fields', new FU__Events__Custom_Fields);
       tribe_singleton('fu.feed', new FU__Events__Feed);
       tribe_singleton('fu.list', new FU__Events__List);
+      tribe_singleton('fu.limbo', new FU__Events__Limbo);
       tribe_singleton('fu.register', new FU__Events__Register);
     }
   }

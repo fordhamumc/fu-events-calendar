@@ -4,7 +4,7 @@
  * Plugin Name:       Fordham Events Calendar Edits
  * Plugin URI:        http://news.fordham.edu
  * Description:       Customizations for Modern Tribe's The Events Calendar
- * Version:           2.0.6
+ * Version:           2.0.5
  * Author:            Michael Foley
  * Author URI:        http://michaeldfoley.com
  * License:           MIT
@@ -55,8 +55,8 @@ function fu_events_autoloading() {
 function fu_show_fail_message() {
   if ( current_user_can( 'activate_plugins' ) ) {
     $url = 'plugin-install.php?tab=plugin-information&plugin=the-events-calendar&TB_iframe=true';
-    $title = __( 'The Events Calendar', 'fu-events-community' );
-    echo '<div class="error"><p>' . sprintf( __( 'To begin using Fordham Events Calendar Edits, please install the latest version of <a href="%1$s" class="thickbox" title="%2$s">%2$s</a>.', 'fu-events-community' ), esc_url( $url ), $title ) . '</p></div>';
+    $title = __( 'The Events Calendar', 'fu-events-calendar' );
+    echo '<div class="error"><p>' . sprintf( __( 'To begin using Fordham Events Calendar Edits, please install the latest version of <a href="%1$s" class="thickbox" title="%2$s">%2$s</a>.', 'fu-events-calendar' ), esc_url( $url ), $title ) . '</p></div>';
   }
 }
 
