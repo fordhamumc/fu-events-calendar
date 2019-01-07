@@ -19,7 +19,7 @@ if ( ! class_exists( 'FU__Events__Limbo' ) ) {
        *
        * @var string
        */
-      public static $post_type = TribeEvents::POSTTYPE;
+      public static $post_type = Tribe__Events__Main::POSTTYPE;
 
       /**
        * Status slug

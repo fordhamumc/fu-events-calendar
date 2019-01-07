@@ -58,7 +58,7 @@ if ( ! class_exists( 'FU__Events__Admin' ) ) {
       if ($column_name == 'fu_events') {
         $args = array(
           'posts_per_page'    => -1,
-          'post_type'         => TribeEvents::POSTTYPE,
+          'post_type'         => Tribe__Events__Main::POSTTYPE,
           'post_status'       => array('publish', 'pending', 'draft', 'auto-draft', 'future', 'private', 'inherit'),
           'meta_key'          => '_EventVenueID',
           'meta_value'        => $event_id

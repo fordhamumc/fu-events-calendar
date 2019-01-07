@@ -174,7 +174,7 @@ if ( ! class_exists( 'FU__Events__Custom_Fields' ) ) {
 
     public function meta_query( $q ) {
       if ( !is_admin() && $q->tribe_is_event_query ) {
-        if( isset($q->query_vars['post_type']) && $q->query_vars['post_type'] == TribeEvents::POSTTYPE ) {
+        if( isset($q->query_vars['post_type']) && $q->query_vars['post_type'] == Tribe__Events__Main::POSTTYPE ) {
           $audience = filter_input( INPUT_GET, 'f_audience', FILTER_SANITIZE_STRING );
           $meta_query = [];
 

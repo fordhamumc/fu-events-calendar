@@ -43,7 +43,7 @@ if ( ! class_exists( 'FU__Events__Register' ) ) {
     public function __construct() {
       add_action( 'init', array( $this, 'init' ) );
       add_action( 'wp_router_generate_routes', array( $this, 'addRoutes' ) );
-      add_action( 'wp_enqueue_scripts', array( 'Tribe__Events__Community__Main', 'enqueue_assets' ), 20 );
+      //add_action( 'wp_enqueue_scripts', array( 'Tribe__Events__Community__Main', 'enqueue_assets' ), 20 );
       add_action( 'tribe_community_before_login_form', array( $this, 'redirect' ) );
       add_action( 'tribe_community_before_login_form', array( $this, 'add_header' ) );
       add_action( 'tribe_community_after_login_form', array( $this, 'add_login_footer' ) );

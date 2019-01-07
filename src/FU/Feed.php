@@ -43,7 +43,7 @@ if ( ! class_exists( 'FU__Events__Feed' ) ) {
 
       $format = filter_input( INPUT_GET, 'imods', FILTER_SANITIZE_STRING );
 
-      if ( is_object( $post ) && $post->post_type == TribeEvents::POSTTYPE && is_feed() && $format ) {
+      if ( is_object( $post ) && $post->post_type == Tribe__Events__Main::POSTTYPE && is_feed() && $format ) {
         $month = tribe_get_start_date($post->ID, false, 'M');
         $day = tribe_get_start_date($post->ID, false, 'j');
         $time = tribe_get_start_time();
