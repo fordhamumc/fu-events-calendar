@@ -1,15 +1,15 @@
-# Copyright (C) 2018 Michael Foley
+# Copyright (C) 2019 Michael Foley
 # This file is distributed under the MIT.
 msgid ""
 msgstr ""
-"Project-Id-Version: Fordham Events Calendar Edits 2.0.4\n"
+"Project-Id-Version: Fordham Events Calendar Edits 2.0.6\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/fu-events-calendar\n"
-"POT-Creation-Date: 2018-04-26 18:38:02+00:00\n"
+"POT-Creation-Date: 2019-10-15 20:43:04+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "X-Generator: node-wp-i18n 1.1.1\n"
@@ -28,85 +28,94 @@ msgstr ""
 msgid "Event Submitter"
 msgstr ""
 
-#: src/FU/Community.php:39
+#: src/FU/Admin.php:79
+msgid "The Events Calendar Sidebar Menu"
+msgstr ""
+
+#: src/FU/Community.php:41
 msgid ""
 "We have upgraded to a new calendar. Please use the form below to submit "
 "your events."
 msgstr ""
 
-#: src/FU/Community.php:43
+#: src/FU/Community.php:45
 msgid "Success! Please login to add an event."
 msgstr ""
 
-#: src/FU/List.php:43
+#: src/FU/Community.php:77 src/FU/Main.php:303
+msgid "Audience"
+msgstr ""
+
+#: src/FU/Limbo.php:51 src/FU/Limbo.php:73 src/FU/Limbo.php:79
+#: src/FU/Limbo.php:99
+msgid "Limbo"
+msgstr ""
+
+#: src/FU/List.php:44
 msgid "Submit an Event"
 msgstr ""
 
-#: src/FU/Main.php:280
+#: src/FU/Main.php:297
 msgid "Event Tags"
-msgstr ""
-
-#: src/FU/Main.php:286
-msgid "Audience"
 msgstr ""
 
 #: src/FU/REST/V1/Endpoints/Single_Tag.php:111
 msgid "the event tag term ID"
 msgstr ""
 
-#: src/FU/Register.php:55
+#: src/FU/Register.php:56
 msgid "Minimum: 8 characters, 1 letter, and 1 number."
 msgstr ""
 
-#: src/FU/Register.php:68
+#: src/FU/Register.php:69
 msgid "register"
 msgstr ""
 
-#: src/FU/Register.php:124
+#: src/FU/Register.php:125
 msgid "Create an Account"
 msgstr ""
 
-#: src/FU/Register.php:216
+#: src/FU/Register.php:228
 msgid "Don't have an account?"
 msgstr ""
 
-#: src/FU/Register.php:218
+#: src/FU/Register.php:230
 msgid "Sign Up"
 msgstr ""
 
-#: src/FU/Register.php:222
+#: src/FU/Register.php:234
 msgid "Forgot password?"
 msgstr ""
 
-#: src/FU/Register.php:426
+#: src/FU/Register.php:438
 msgid "Required form field is missing."
 msgstr ""
 
-#: src/FU/Register.php:470 src/FU/Register.php:507
+#: src/FU/Register.php:482 src/FU/Register.php:519
 msgid "The %s you entered is not valid."
 msgstr ""
 
-#: src/FU/Register.php:474
+#: src/FU/Register.php:486
 msgid "That %s is already in use."
 msgstr ""
 
-#: src/FU/Register.php:499
+#: src/FU/Register.php:511
 msgid "%s is too short. At least 4 characters are required."
 msgstr ""
 
-#: src/FU/Register.php:503
+#: src/FU/Register.php:515
 msgid "That %s already exists."
 msgstr ""
 
-#: src/FU/Register.php:533
+#: src/FU/Register.php:545
 msgid "%s is too short. At least 8 characters are required."
 msgstr ""
 
-#: src/FU/Register.php:537
+#: src/FU/Register.php:549
 msgid "%s must include at least one number."
 msgstr ""
 
-#: src/FU/Register.php:541
+#: src/FU/Register.php:553
 msgid "%s must include at least one letter."
 msgstr ""
 
@@ -185,22 +194,29 @@ msgstr ""
 msgid "http://michaeldfoley.com"
 msgstr ""
 
-#: src/FU/Main.php:278
+#: src/FU/Limbo.php:52
+msgctxt "event status"
+msgid "Limbo <span class=\"count\">(%s)</span>"
+msgid_plural "Limbo <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/FU/Main.php:295
 msgctxt "Taxonomy General Name"
 msgid "Event Tags"
 msgstr ""
 
-#: src/FU/Main.php:284
+#: src/FU/Main.php:301
 msgctxt "Taxonomy General Name"
 msgid "Audiences"
 msgstr ""
 
-#: src/FU/Main.php:279
+#: src/FU/Main.php:296
 msgctxt "Taxonomy Singular Name"
 msgid "Event Tag"
 msgstr ""
 
-#: src/FU/Main.php:285
+#: src/FU/Main.php:302
 msgctxt "Taxonomy Singular Name"
 msgid "Audience"
 msgstr ""

@@ -22,7 +22,7 @@ if ( ! class_exists( 'FU__Events__List' ) ) {
      */
 
     public function __construct() {
-      add_filter( 'tribe_events_after_the_title', array($this, 'add_submit_button') );
+      add_action( 'tribe_events_after_the_title', array($this, 'add_submit_button') );
       add_filter( 'tribe-events-bar-filters', array($this, 'search_bar_order') );
       add_filter( 'tribe_events_recurrence_tooltip', array($this, 'remove_recurring_event_label') );
     }
@@ -40,7 +40,9 @@ if ( ! class_exists( 'FU__Events__List' ) ) {
     public function add_submit_button() {
       if ( class_exists('Tribe__Events__Community__Main') ) {
         $tec = tribe( 'community.main' );
-        printf('<div class="tribe-bar-community-submit"><a href="/%s" class="button">%s</a></div>', $tec->getCommunityRewriteSlug() . '/' . $tec->rewriteSlugs['add'], esc_html__('Submit an Event', 'fu-events-calendar'));
+        if (tribe('tec.bar')->should_show()) {
+          printf('<div class="tribe-bar-community-submit"><a href="/%s" class="button">%s</a></div>', $tec->getCommunityRewriteSlug() . '/' . $tec->rewriteSlugs['add'], esc_html__('Submit an Event', 'fu-events-calendar'));
+        }
       }
     }
 

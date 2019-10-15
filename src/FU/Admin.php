@@ -40,7 +40,7 @@ if ( ! class_exists( 'FU__Events__Admin' ) ) {
      */
 
     public function venue_columns_head($columns) {
-      $columns['fu_events']  = 'Events';
+      $columns['FU_Timeout']  = 'Events';
       return $columns;
     }
 
@@ -55,7 +55,7 @@ if ( ! class_exists( 'FU__Events__Admin' ) ) {
      */
 
     public function venue_columns_content($column_name, $event_id) {
-      if ($column_name == 'fu_events') {
+      if ($column_name == 'FU_Timeout') {
         $args = array(
           'posts_per_page'    => -1,
           'post_type'         => Tribe__Events__Main::POSTTYPE,

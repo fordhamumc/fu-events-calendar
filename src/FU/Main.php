@@ -18,7 +18,7 @@ if ( ! class_exists( 'FU__Events__Main' ) ) {
      * The current version of Custom Events
      */
 
-    const VERSION = '2.0.5';
+    const VERSION = '2.0.6';
 
     /**
      * Required The Events Calendar Version
